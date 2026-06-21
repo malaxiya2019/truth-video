@@ -1,0 +1,11 @@
+node_modules
+.git
+.hermes
+renders
+output*
+dist
+*.md
+!examples/*.md
+!README.md
+__pycache__
+*.pyc

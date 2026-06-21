@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "truth-video 配置",
+  "type": "object",
+  "properties": {
+    "persona": {
+      "type": "string",
+      "enum": ["professor", "explainer", "science", "coach", "tech_expert", "hacker", "storyteller"],
+      "default": "professor",
+      "description": "讲师人格"
+    },
+    "truthMode": {
+      "type": "string",
+      "enum": ["normal", "strict", "off"],
+      "default": "normal",
+      "description": "Truth Router 校验模式"
+    },
+    "quality": {
+      "type": "string",
+      "enum": ["draft", "normal", "high"],
+      "default": "normal",
+      "description": "输出画质"
+    },
+    "template": {
+      "type": "string",
+      "enum": ["tech", "minimal", "tutorial", "presentation", "modern", "dark"],
+      "default": "tech",
+      "description": "视觉模板"
+    },
+    "outDir": {
+      "type": "string",
+      "default": "output",
+      "description": "输出目录"
+    },
+    "hwAccel": {
+      "type": "boolean",
+      "default": true,
+      "description": "启用 GPU 硬件编码"
+    },
+    "tts": {
+      "type": "object",
+      "properties": {
+        "engine": { "type": "string", "default": "edge-tts" },
+        "rate": { "type": "number", "default": 1.0 },
+        "pitch": { "type": "number", "default": 1.0 }
+      }
+    },
+    "subtitle": {
+      "type": "object",
+      "properties": {
+        "formats": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["srt", "ass", "karaoke", "intelligent", "lecture"]
+        },
+        "burnIn": { "type": "boolean", "default": true }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "properties": {
+        "transitionSteps": { "type": "integer", "default": 8 },
+        "transitionDuration": { "type": "number", "default": 0.5 },
+        "forceIterations": { "type": "integer", "default": 60 }
+      }
+    }
+  }
+}

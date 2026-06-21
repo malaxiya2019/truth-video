@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.hermes/
+.truth-video/
+renders/
+output*
+all_videos/
+*_test/
+*.mp4
+*.png
+*.srt
+*.ass
+*.wav
+__pycache__
+*.pyc
+.github_token
+truth-video/.github_token

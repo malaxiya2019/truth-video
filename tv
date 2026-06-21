@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# truth-video 中文命令
+#
+# 用法:
+#   ./tv 渲染 examples/demo_zh.md
+#   ./tv 服务
+#   ./tv 批量 examples/
+#   ./tv 主题 "RAG 检索增强生成"
+#   ./tv 测试
+#   ./tv 帮助
+
+set -e
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+CMD="${1:-帮助}"
+shift 2>/dev/null || true
+
+case "$CMD" in
+  渲染)
+    node "$ROOT/src/cli.js" "$@"
+    ;;
+  服务|启动)
+    node "$ROOT/src/server.js" "$@"
+    ;;
+  批量)
+    DIR="${1:-examples}"
+    shift 2>/dev/null || true
+    node "$ROOT/src/cli.js" --batch="$ROOT/$DIR" --out="${OUT:-./全部视频}" "$@"
+    ;;
+  主题|话题)
+    TOPIC="$1"
+    shift 2>/dev/null || true
+    if [ -z "$TOPIC" ]; then
+      echo "请输入主题，如: ./tv 主题 \"什么是 RAG\""
+      exit 1
+    fi
+    node "$ROOT/src/cli.js" --topic="$TOPIC" "$@"
+    ;;
+  测试)
+    npm --prefix "$ROOT" test
+    ;;
+  清空知识图谱)
+    node "$ROOT/src/cli.js" --truth-kg-clear
+    ;;
+  人格|讲师)
+    node "$ROOT/src/cli.js" --personas
+    ;;
+  模板)
+    node "$ROOT/src/cli.js" --templates
+    ;;
+  配置)
+    cat "$ROOT/.truth-video.json" 2>/dev/null || echo "(暂无项目配置)"
+    ;;
+  帮助)
+    echo ""
+    echo "  🎓 truth-video 中文命令"
+    echo ""
+    echo "  用法: ./tv <命令> [参数]"
+    echo ""
+    echo "  命令:"
+    echo "    渲染 <文件>      渲染单个 Markdown 文件"
+    echo "    服务             启动 Web UI 界面"
+    echo "    批量 <目录>      批量渲染目录下所有 .md"
+    echo "    主题 <主题>      AI 写稿 + 渲染"
+    echo "    测试             运行测试套件"
+    echo "    人格             列出所有讲师人格"
+    echo "    模板             列出所有视觉模板"
+    echo "    清空知识图谱     清除 Truth Router 缓存"
+    echo "    配置             查看项目配置"
+    echo "    帮助             显示此帮助"
+    echo ""
+    echo "  示例:"
+    echo "    ./tv 渲染 examples/demo_zh.md"
+    echo "    ./tv 服务"
+    echo "    ./tv 主题 \"什么是向量数据库\""
+    echo "    ./tv 批量 examples/ --persona=explainer"
+    echo "    ./tv 渲染 examples/demo.md --quality=high --persona=professor"
+    echo ""
+    ;;
+  *)
+    echo "未知命令: $CMD"
+    echo "可用命令: 渲染, 服务, 批量, 主题, 测试, 人格, 帮助"
+    exit 1
+    ;;
+esac

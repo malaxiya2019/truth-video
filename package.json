@@ -1,0 +1,15 @@
+{
+  "name": "truth-video",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "render": "node src/cli.js",
+    "server": "node src/server.js",
+    "test": "node --test tests/all.test.js",
+    "test:watch": "node --test --watch tests/all.test.js"
+  },
+  "dependencies": {
+    "marked": "^16.0.0",
+    "playwright": "^1.52.0"
+  }
+}

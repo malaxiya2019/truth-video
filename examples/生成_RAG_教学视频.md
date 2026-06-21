@@ -1,0 +1,1 @@
+[{"id":"write_script","type":"shell","payload":"echo \"编写视频脚本: 主题: 生成 RAG 教学视频\""},{"id":"render","type":"shell","payload":"echo \"渲染视频: 主题: 生成 RAG 教学视频\""}]

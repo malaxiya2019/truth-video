@@ -1,0 +1,17 @@
+name: truth-video
+services:
+  app:
+    build: .
+    image: truth-video:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      # 挂载 examples 目录以使用自定义 .md 文件
+      - ./examples:/app/examples:ro
+      # 挂载输出目录
+      - ./output_docker:/app/output_webui
+    environment:
+      - PORT=3000
+      # 可选: TTS 引擎
+      # - OPENAI_API_KEY=sk-...
+    restart: unless-stopped

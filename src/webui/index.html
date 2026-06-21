@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>truth-video Web UI</title>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>🎓 truth-video</h1>
+    <p class="subtitle">知识图谱教学视频编译器</p>
+  </header>
+
+  <div class="main-layout">
+    <!-- 左侧: 输入 -->
+    <section class="panel input-panel">
+      <h2>📝 选择输入</h2>
+
+      <div class="tab-bar">
+        <button class="tab active" data-tab="file">文件</button>
+        <button class="tab" data-tab="topic">主题</button>
+        <button class="tab" data-tab="history">历史</button>
+      </div>
+
+      <!-- Tab: 文件 -->
+      <div id="tab-file" class="tab-content active">
+        <select id="file-select" size="8">
+          <option value="" disabled>加载中...</option>
+        </select>
+        <button id="btn-refresh" class="btn-sm">🔄 刷新</button>
+      </div>
+
+      <!-- Tab: 主题 -->
+      <div id="tab-topic" class="tab-content">
+        <input type="text" id="topic-input" placeholder="输入主题，如: 什么是 RAG" />
+        <select id="style-select">
+          <option value="通俗">通俗讲解</option>
+          <option value="academic">学术风格</option>
+          <option value="technical">技术细节</option>
+        </select>
+      </div>
+
+      <!-- Tab: 历史 -->
+      <div id="tab-history" class="tab-content">
+        <div id="history-list">
+          <p class="hint">暂无渲染历史</p>
+        </div>
+        <button id="btn-refresh-history" class="btn-sm" style="margin-top:8px">🔄 刷新历史</button>
+      </div>
+
+      <h2>⚙️ 选项</h2>
+      <div class="options-grid">
+        <label>讲师</label>
+        <select id="persona-select">
+          <option value="professor">🎓 教授</option>
+          <option value="explainer">⚡ 快速解说</option>
+          <option value="science">🔬 科普</option>
+          <option value="coach">🎯 教练</option>
+        </select>
+
+        <label>画质</label>
+        <select id="quality-select">
+          <option value="draft">草稿 (854x480)</option>
+          <option value="normal" selected>标准 (1280x720)</option>
+          <option value="high">高画质 (1920x1080)</option>
+        </select>
+
+        <label>校验</label>
+        <select id="truth-select">
+          <option value="normal">标准</option>
+          <option value="strict">严格</option>
+          <option value="off">关闭</option>
+        </select>
+      </div>
+
+      <button id="btn-render" class="btn-primary">▶ 开始渲染</button>
+    </section>
+
+    <!-- 右侧: 输出 -->
+    <section class="panel output-panel">
+      <h2>📊 渲染状态</h2>
+      <div id="job-status">
+        <p class="hint">选择文件或输入主题，点击"开始渲染"</p>
+      </div>
+
+      <div id="progress-log" class="log-box"></div>
+
+      <div id="output-files" class="file-list"></div>
+    </section>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

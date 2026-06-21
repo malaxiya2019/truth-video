@@ -1,7 +1,19 @@
 {
   "name": "truth-video",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Turn Markdown into AI-generated educational videos with knowledge graph animations / 把Markdown编译成带知识图谱动画的AI教学视频",
   "type": "module",
+  "keywords": ["video", "education", "knowledge-graph", "ai", "markdown", "tts", "animation"],
+  "author": "malaxiya2019",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malaxiya2019/truth-video.git"
+  },
+  "bugs": {
+    "url": "https://github.com/malaxiya2019/truth-video/issues"
+  },
+  "homepage": "https://github.com/malaxiya2019/truth-video",
   "scripts": {
     "render": "node src/cli.js",
     "server": "node src/server.js",

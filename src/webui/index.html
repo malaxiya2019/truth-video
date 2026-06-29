@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>truth-video Web UI</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="/app.css">
+<link rel="icon" href="/icon-192.png" sizes="192x192">
 </head>
 <body>
 <div class="app">
@@ -93,5 +97,10 @@
 </div>
 
 <script src="/app.js"></script>
+<script>
+if("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
+</script>
 </body>
 </html>

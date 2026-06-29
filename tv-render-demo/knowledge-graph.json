@@ -1,0 +1,796 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "大模型实战指南",
+        "label": "大模型实战指南",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 0,
+        "weight": 1
+      },
+      {
+        "id": "什么是大语言模型",
+        "label": "什么是大语言模型",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "大语言模型",
+        "label": "大语言模型",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "llm",
+        "label": "LLM",
+        "type": "concept",
+        "confidence": 0.9,
+        "sceneIndex": 1,
+        "weight": 3
+      },
+      {
+        "id": "是一种基于深度学习的自然语言处理模型",
+        "label": "是一种基于深度学习的自然语言处理模型",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "通过海量文本训练而来",
+        "label": "通过海量文本训练而来",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "代表模型包括",
+        "label": "代表模型包括",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "claude",
+        "label": "Claude",
+        "type": "concept",
+        "confidence": 0.7,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "gemini",
+        "label": "Gemini",
+        "type": "concept",
+        "confidence": 0.7,
+        "sceneIndex": 1,
+        "weight": 1
+      },
+      {
+        "id": "模型的工作原理",
+        "label": "模型的工作原理",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 2,
+        "weight": 1
+      },
+      {
+        "id": "transformer",
+        "label": "Transformer",
+        "type": "concept",
+        "confidence": 0.7,
+        "sceneIndex": 2,
+        "weight": 1
+      },
+      {
+        "id": "通过自注意力机制理解文本上下文",
+        "label": "通过自注意力机制理解文本上下文",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 2,
+        "weight": 1
+      },
+      {
+        "id": "它根据前文预测下一个词",
+        "label": "它根据前文预测下一个词",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 2,
+        "weight": 1
+      },
+      {
+        "id": "逐步生成完整回答",
+        "label": "逐步生成完整回答",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 2,
+        "weight": 1
+      },
+      {
+        "id": "提示词工程基础",
+        "label": "提示词工程基础",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 3,
+        "weight": 1
+      },
+      {
+        "id": "提示词工程是引导模型输出的关键技能",
+        "label": "提示词工程是引导模型输出的关键技能",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 3,
+        "weight": 1
+      },
+      {
+        "id": "包括角色设定",
+        "label": "包括角色设定",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 3,
+        "weight": 1
+      },
+      {
+        "id": "格式约束",
+        "label": "格式约束",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 3,
+        "weight": 1
+      },
+      {
+        "id": "示例引导和思维链提示等技术",
+        "label": "示例引导和思维链提示等技术",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 3,
+        "weight": 1
+      },
+      {
+        "id": "零样本与少样本学习",
+        "label": "零样本与少样本学习",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 4,
+        "weight": 1
+      },
+      {
+        "id": "零样本提示直接给出任务描述",
+        "label": "零样本提示直接给出任务描述",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 4,
+        "weight": 1
+      },
+      {
+        "id": "少样本提示则提供",
+        "label": "少样本提示则提供",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 4,
+        "weight": 1
+      },
+      {
+        "id": "个示例帮助模型理解格式和期望的输出风格",
+        "label": "个示例帮助模型理解格式和期望的输出风格",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 4,
+        "weight": 1
+      },
+      {
+        "id": "思维链推理",
+        "label": "思维链推理",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 5,
+        "weight": 1
+      },
+      {
+        "id": "思维链",
+        "label": "思维链",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 5,
+        "weight": 1
+      },
+      {
+        "id": "让模型展示推理过程",
+        "label": "让模型展示推理过程",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 5,
+        "weight": 1
+      },
+      {
+        "id": "在数学",
+        "label": "在数学",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 5,
+        "weight": 1
+      },
+      {
+        "id": "逻辑和复杂问题中效果显著",
+        "label": "逻辑和复杂问题中效果显著",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 5,
+        "weight": 1
+      },
+      {
+        "id": "能大幅提升准确性",
+        "label": "能大幅提升准确性",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 5,
+        "weight": 1
+      },
+      {
+        "id": "rag",
+        "label": "RAG",
+        "type": "solution",
+        "confidence": 0.9,
+        "sceneIndex": 6,
+        "weight": 2
+      },
+      {
+        "id": "检索增强生成",
+        "label": "检索增强生成",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 6,
+        "weight": 1
+      },
+      {
+        "id": "将外部知识库检索与生成模型结合",
+        "label": "将外部知识库检索与生成模型结合",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 6,
+        "weight": 1
+      },
+      {
+        "id": "先检索相关文档",
+        "label": "先检索相关文档",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 6,
+        "weight": 1
+      },
+      {
+        "id": "再基于检索结果生成回答",
+        "label": "再基于检索结果生成回答",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 6,
+        "weight": 1
+      },
+      {
+        "id": "有效减少幻觉",
+        "label": "有效减少幻觉",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 6,
+        "weight": 1
+      },
+      {
+        "id": "向量数据库",
+        "label": "向量数据库",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 7,
+        "weight": 1
+      },
+      {
+        "id": "向量数据库将文本转为向量存储",
+        "label": "向量数据库将文本转为向量存储",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 7,
+        "weight": 1
+      },
+      {
+        "id": "支持语义相似度搜索",
+        "label": "支持语义相似度搜索",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 7,
+        "weight": 1
+      },
+      {
+        "id": "系统能快速找到最相关的内容片段",
+        "label": "系统能快速找到最相关的内容片段",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 7,
+        "weight": 1
+      },
+      {
+        "id": "模型微调方法",
+        "label": "模型微调方法",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 8,
+        "weight": 1
+      },
+      {
+        "id": "是一种高效的参数微调方法",
+        "label": "是一种高效的参数微调方法",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 8,
+        "weight": 1
+      },
+      {
+        "id": "冻结原模型权重",
+        "label": "冻结原模型权重",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 8,
+        "weight": 1
+      },
+      {
+        "id": "插入低秩矩阵适配器",
+        "label": "插入低秩矩阵适配器",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 8,
+        "weight": 1
+      },
+      {
+        "id": "相比全量微调节省",
+        "label": "相比全量微调节省",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 8,
+        "weight": 1
+      },
+      {
+        "id": "的计算资源",
+        "label": "的计算资源",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 8,
+        "weight": 1
+      },
+      {
+        "id": "agent",
+        "label": "Agent",
+        "type": "concept",
+        "confidence": 0.7,
+        "sceneIndex": 9,
+        "weight": 2
+      },
+      {
+        "id": "智能体",
+        "label": "智能体",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "ai",
+        "label": "AI",
+        "type": "concept",
+        "confidence": 0.9,
+        "sceneIndex": 9,
+        "weight": 2
+      },
+      {
+        "id": "能自主调用工具",
+        "label": "能自主调用工具",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "规划任务",
+        "label": "规划任务",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "执行操作",
+        "label": "执行操作",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "结合函数调用和",
+        "label": "结合函数调用和",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "思维框架",
+        "label": "思维框架",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "完成复杂工作流",
+        "label": "完成复杂工作流",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 9,
+        "weight": 1
+      },
+      {
+        "id": "评估与监控",
+        "label": "评估与监控",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "模型评估包括准确率",
+        "label": "模型评估包括准确率",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "召回率",
+        "label": "召回率",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "bleu",
+        "label": "BLEU",
+        "type": "concept",
+        "confidence": 0.7,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "等指标",
+        "label": "等指标",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "生产环境需要监控延迟",
+        "label": "生产环境需要监控延迟",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "令牌消耗和输出质量",
+        "label": "令牌消耗和输出质量",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 10,
+        "weight": 1
+      },
+      {
+        "id": "安全与对齐",
+        "label": "安全与对齐",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 11,
+        "weight": 1
+      },
+      {
+        "id": "安全包括红队测试",
+        "label": "安全包括红队测试",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 11,
+        "weight": 1
+      },
+      {
+        "id": "内容过滤",
+        "label": "内容过滤",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 11,
+        "weight": 1
+      },
+      {
+        "id": "越狱防护",
+        "label": "越狱防护",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 11,
+        "weight": 1
+      },
+      {
+        "id": "rlhf",
+        "label": "RLHF",
+        "type": "concept",
+        "confidence": 0.7,
+        "sceneIndex": 11,
+        "weight": 1
+      },
+      {
+        "id": "通过对齐训练让模型符合人类价值观",
+        "label": "通过对齐训练让模型符合人类价值观",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 11,
+        "weight": 1
+      },
+      {
+        "id": "未来趋势",
+        "label": "未来趋势",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 12,
+        "weight": 1
+      },
+      {
+        "id": "多模态模型",
+        "label": "多模态模型",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 12,
+        "weight": 1
+      },
+      {
+        "id": "超长上下文",
+        "label": "超长上下文",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 12,
+        "weight": 1
+      },
+      {
+        "id": "协作和自我改进是",
+        "label": "协作和自我改进是",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 12,
+        "weight": 1
+      },
+      {
+        "id": "的主要发展方向",
+        "label": "的主要发展方向",
+        "type": "concept",
+        "confidence": 0.5,
+        "sceneIndex": 12,
+        "weight": 1
+      }
+    ],
+    "edges": [
+      {
+        "from": "什么是大语言模型",
+        "to": "大语言模型",
+        "relation": "related_to"
+      },
+      {
+        "from": "代表模型包括",
+        "to": "claude",
+        "relation": "related_to"
+      },
+      {
+        "from": "模型的工作原理",
+        "to": "llm",
+        "relation": "related_to"
+      },
+      {
+        "from": "它根据前文预测下一个词",
+        "to": "逐步生成完整回答",
+        "relation": "related_to"
+      },
+      {
+        "from": "提示词工程基础",
+        "to": "提示词工程是引导模型输出的关键技能",
+        "relation": "related_to"
+      },
+      {
+        "from": "包括角色设定",
+        "to": "格式约束",
+        "relation": "related_to"
+      },
+      {
+        "from": "零样本与少样本学习",
+        "to": "零样本提示直接给出任务描述",
+        "relation": "related_to"
+      },
+      {
+        "from": "少样本提示则提供",
+        "to": "个示例帮助模型理解格式和期望的输出风格",
+        "relation": "related_to"
+      },
+      {
+        "from": "思维链推理",
+        "to": "思维链",
+        "relation": "related_to"
+      },
+      {
+        "from": "在数学",
+        "to": "逻辑和复杂问题中效果显著",
+        "relation": "related_to"
+      },
+      {
+        "from": "rag",
+        "to": "检索增强生成",
+        "relation": "related_to"
+      },
+      {
+        "from": "先检索相关文档",
+        "to": "再基于检索结果生成回答",
+        "relation": "related_to"
+      },
+      {
+        "from": "向量数据库",
+        "to": "向量数据库将文本转为向量存储",
+        "relation": "related_to"
+      },
+      {
+        "from": "支持语义相似度搜索",
+        "to": "rag",
+        "relation": "related_to"
+      },
+      {
+        "from": "模型微调方法",
+        "to": "是一种高效的参数微调方法",
+        "relation": "related_to"
+      },
+      {
+        "from": "相比全量微调节省",
+        "to": "的计算资源",
+        "relation": "related_to"
+      },
+      {
+        "from": "agent",
+        "to": "智能体",
+        "relation": "related_to"
+      },
+      {
+        "from": "结合函数调用和",
+        "to": "思维框架",
+        "relation": "related_to"
+      },
+      {
+        "from": "评估与监控",
+        "to": "模型评估包括准确率",
+        "relation": "related_to"
+      },
+      {
+        "from": "生产环境需要监控延迟",
+        "to": "令牌消耗和输出质量",
+        "relation": "related_to"
+      },
+      {
+        "from": "安全与对齐",
+        "to": "ai",
+        "relation": "related_to"
+      },
+      {
+        "from": "rlhf",
+        "to": "通过对齐训练让模型符合人类价值观",
+        "relation": "related_to"
+      },
+      {
+        "from": "未来趋势",
+        "to": "多模态模型",
+        "relation": "related_to"
+      }
+    ]
+  },
+  "stats": {
+    "nodes": 72,
+    "edges": 23,
+    "types": {
+      "concept": 71,
+      "solution": 1
+    },
+    "density": 0.3194444444444444
+  },
+  "scenes": [
+    {
+      "type": "cover",
+      "title": "大模型实战指南",
+      "body": "",
+      "index": 0
+    },
+    {
+      "type": "slide",
+      "title": "什么是大语言模型",
+      "body": "大语言模型（LLM）是一种基于深度学习的自然语言处理模型，通过海量文本训练而来。代表模型包括 GPT-4、Claude、Gemini 和 DeepSeek。",
+      "index": 1
+    },
+    {
+      "type": "slide",
+      "title": "模型的工作原理",
+      "body": "LLM 使用 Transformer 架构，通过自注意力机制理解文本上下文。它根据前文预测下一个词，逐步生成完整回答。",
+      "index": 2
+    },
+    {
+      "type": "slide",
+      "title": "提示词工程基础",
+      "body": "提示词工程是引导模型输出的关键技能。包括角色设定、格式约束、示例引导和思维链提示等技术。",
+      "index": 3
+    },
+    {
+      "type": "slide",
+      "title": "零样本与少样本学习",
+      "body": "零样本提示直接给出任务描述。少样本提示则提供 2-5 个示例帮助模型理解格式和期望的输出风格。",
+      "index": 4
+    },
+    {
+      "type": "slide",
+      "title": "思维链推理",
+      "body": "思维链（Chain-of-Thought）让模型展示推理过程。在数学、逻辑和复杂问题中效果显著，能大幅提升准确性。",
+      "index": 5
+    },
+    {
+      "type": "slide",
+      "title": "RAG 检索增强生成",
+      "body": "RAG 将外部知识库检索与生成模型结合。先检索相关文档，再基于检索结果生成回答，有效减少幻觉。",
+      "index": 6
+    },
+    {
+      "type": "slide",
+      "title": "向量数据库",
+      "body": "向量数据库将文本转为向量存储。支持语义相似度搜索，让 RAG 系统能快速找到最相关的内容片段。",
+      "index": 7
+    },
+    {
+      "type": "slide",
+      "title": "模型微调方法",
+      "body": "LoRA 是一种高效的参数微调方法，冻结原模型权重，插入低秩矩阵适配器。相比全量微调节省 90% 的计算资源。",
+      "index": 8
+    },
+    {
+      "type": "slide",
+      "title": "Agent 智能体",
+      "body": "AI Agent 能自主调用工具、规划任务、执行操作。结合函数调用和 ReAct 思维框架，完成复杂工作流。",
+      "index": 9
+    },
+    {
+      "type": "slide",
+      "title": "评估与监控",
+      "body": "模型评估包括准确率、召回率、BLEU 等指标。生产环境需要监控延迟、令牌消耗和输出质量。",
+      "index": 10
+    },
+    {
+      "type": "slide",
+      "title": "安全与对齐",
+      "body": "AI 安全包括红队测试、内容过滤、越狱防护。RLHF 通过对齐训练让模型符合人类价值观。",
+      "index": 11
+    },
+    {
+      "type": "slide",
+      "title": "未来趋势",
+      "body": "多模态模型、超长上下文、Agent 协作和自我改进是 LLM 的主要发展方向。",
+      "index": 12
+    }
+  ],
+  "kgStats": {
+    "total_facts": 32,
+    "total_relations": 0,
+    "verified": 29,
+    "questionable": 2,
+    "error": 1,
+    "unknown": 0
+  }
+}

@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<style>
+body {
+  margin: 0;
+  background: #0b0b0b;
+  color: white;
+  font-family: sans-serif;
+}
+
+.frame {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  border-bottom: 1px solid #222;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.body {
+  margin-top: 20px;
+  font-size: 28px;
+  color: #aaa;
+}
+</style>
+
+</head>
+<body>
+
+
+    <section class="frame" data-index="0">
+      <div class="title">大模型实战指南</div>
+      <div class="body"></div>
+    </section>
+  
+    <section class="frame" data-index="1">
+      <div class="title">什么是大语言模型</div>
+      <div class="body">大语言模型（LLM）是一种基于深度学习的自然语言处理模型，通过海量文本训练而来。代表模型包括 GPT-4、Claude、Gemini 和 DeepSeek。</div>
+    </section>
+  
+    <section class="frame" data-index="2">
+      <div class="title">模型的工作原理</div>
+      <div class="body">LLM 使用 Transformer 架构，通过自注意力机制理解文本上下文。它根据前文预测下一个词，逐步生成完整回答。</div>
+    </section>
+  
+    <section class="frame" data-index="3">
+      <div class="title">提示词工程基础</div>
+      <div class="body">提示词工程是引导模型输出的关键技能。包括角色设定、格式约束、示例引导和思维链提示等技术。</div>
+    </section>
+  
+    <section class="frame" data-index="4">
+      <div class="title">零样本与少样本学习</div>
+      <div class="body">零样本提示直接给出任务描述。少样本提示则提供 2-5 个示例帮助模型理解格式和期望的输出风格。</div>
+    </section>
+  
+    <section class="frame" data-index="5">
+      <div class="title">思维链推理</div>
+      <div class="body">思维链（Chain-of-Thought）让模型展示推理过程。在数学、逻辑和复杂问题中效果显著，能大幅提升准确性。</div>
+    </section>
+  
+    <section class="frame" data-index="6">
+      <div class="title">RAG 检索增强生成</div>
+      <div class="body">RAG 将外部知识库检索与生成模型结合。先检索相关文档，再基于检索结果生成回答，有效减少幻觉。</div>
+    </section>
+  
+    <section class="frame" data-index="7">
+      <div class="title">向量数据库</div>
+      <div class="body">向量数据库将文本转为向量存储。支持语义相似度搜索，让 RAG 系统能快速找到最相关的内容片段。</div>
+    </section>
+  
+    <section class="frame" data-index="8">
+      <div class="title">模型微调方法</div>
+      <div class="body">LoRA 是一种高效的参数微调方法，冻结原模型权重，插入低秩矩阵适配器。相比全量微调节省 90% 的计算资源。</div>
+    </section>
+  
+    <section class="frame" data-index="9">
+      <div class="title">Agent 智能体</div>
+      <div class="body">AI Agent 能自主调用工具、规划任务、执行操作。结合函数调用和 ReAct 思维框架，完成复杂工作流。</div>
+    </section>
+  
+    <section class="frame" data-index="10">
+      <div class="title">评估与监控</div>
+      <div class="body">模型评估包括准确率、召回率、BLEU 等指标。生产环境需要监控延迟、令牌消耗和输出质量。</div>
+    </section>
+  
+    <section class="frame" data-index="11">
+      <div class="title">安全与对齐</div>
+      <div class="body">AI 安全包括红队测试、内容过滤、越狱防护。RLHF 通过对齐训练让模型符合人类价值观。</div>
+    </section>
+  
+    <section class="frame" data-index="12">
+      <div class="title">未来趋势</div>
+      <div class="body">多模态模型、超长上下文、Agent 协作和自我改进是 LLM 的主要发展方向。</div>
+    </section>
+  
+
+</body>
+</html>

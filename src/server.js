@@ -270,6 +270,26 @@ async function handleRequest(req, res) {
     return;
   }
 
+  if (url.pathname === "/manifest.json") {
+    serveStatic(res, path.join(__dirname, "webui", "manifest.json"));
+    return;
+  }
+
+  if (url.pathname === "/sw.js") {
+    serveStatic(res, path.join(__dirname, "webui", "sw.js"));
+    return;
+  }
+
+  if (url.pathname === "/icon-192.png") {
+    serveStatic(res, path.join(__dirname, "webui", "icon-192.png"));
+    return;
+  }
+
+  if (url.pathname === "/icon-512.png") {
+    serveStatic(res, path.join(__dirname, "webui", "icon-512.png"));
+    return;
+  }
+
   if (url.pathname === "/kg-viewer.html") {
     serveStatic(res, path.join(__dirname, "webui", "kg-viewer.html"));
     return;

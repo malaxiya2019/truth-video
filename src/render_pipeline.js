@@ -82,7 +82,7 @@ export async function renderOne(file, outDir, options = {}) {
   const scenePositions = precomputeScenePositions(graph, scenes);
   const templateName = options.template || "tech";
   // 动态分配每场景时长: 默认每场景 3s (过渡帧另计 0.5s/段)
-  const defaultSceneDur = scenes.map(() => 3.0);
+  const defaultSceneDur = scenes.map(() => 10.0);
   const frameMetas = generateFrameSequence(graph, scenePositions, 8, defaultSceneDur, templateName);
   const totalFrameDur = frameMetas.reduce((s, f) => s + f.duration, 0);
   console.log(`${frameMetas.length} 帧 (${totalFrameDur.toFixed(1)}s)`);

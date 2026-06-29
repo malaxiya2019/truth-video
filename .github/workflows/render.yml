@@ -1,0 +1,150 @@
+# ===================================================
+# 🎬 TruthVideo 云渲染工作流
+# 用法: 在 GitHub 仓库页面 → Actions → Render Video
+#       填写 Markdown 内容，选择配置，一键渲染
+# ===================================================
+
+name: 🎬 Render Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      markdown:
+        description: '📝 Markdown 内容（或留空使用 examples/ 中的文件）'
+        required: false
+        type: string
+      markdown_file:
+        description: '📂 使用仓库中的 .md 文件路径 (如 examples/demo_zh.md)'
+        required: false
+        type: string
+        default: ''
+      persona:
+        description: '🎭 讲师人格'
+        required: true
+        default: 'professor'
+        type: choice
+        options:
+          - professor
+          - explainer
+          - science
+          - coach
+          - tech
+          - hacker
+          - storyteller
+      template:
+        description: '🎨 视觉模板'
+        required: true
+        default: 'tech'
+        type: choice
+        options:
+          - tech
+          - minimal
+          - tutorial
+          - presentation
+          - modern
+          - dark
+          - matcha
+      quality:
+        description: '⚡ 画质 (draft=快速, normal=标准, high=高清)'
+        required: true
+        default: 'draft'
+        type: choice
+        options:
+          - draft
+          - normal
+          - high
+      truth_mode:
+        description: '🔍 事实校验模式'
+        required: true
+        default: 'normal'
+        type: choice
+        options:
+          - normal
+          - strict
+          - off
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: 📦 Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: 🌐 Install Chromium
+        run: npx playwright install chromium
+
+      - name: 🔧 Install system tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-wqy-zenhei
+          pip3 install edge-tts
+
+      - name: 📝 Prepare Markdown input
+        run: |
+          if [ -n "${{ inputs.markdown }}" ]; then
+            # 用户手动输入了 Markdown
+            echo '${{ inputs.markdown }}' > /tmp/input.md
+            echo "📄 使用手动输入的 Markdown"
+          elif [ -n "${{ inputs.markdown_file }}" ]; then
+            # 使用仓库中的文件
+            cp "${{ inputs.markdown_file }}" /tmp/input.md
+            echo "📄 使用仓库文件: ${{ inputs.markdown_file }}"
+          else
+            # 默认 demo
+            cp examples/demo_zh.md /tmp/input.md
+            echo "📄 使用默认 demo"
+          fi
+          echo ""
+          echo "=== Markdown 内容预览 ==="
+          head -30 /tmp/input.md
+
+      - name: 🎬 Render video
+        run: |
+          mkdir -p /tmp/output
+          node src/cli.js /tmp/input.md \
+            --out=/tmp/output \
+            --persona=${{ inputs.persona }} \
+            --template=${{ inputs.template }} \
+            --quality=${{ inputs.quality }} \
+            --truth-mode=${{ inputs.truth_mode }}
+        timeout-minutes: 25
+
+      - name: 📦 List output files
+        run: |
+          echo "=== 输出文件 ==="
+          ls -lh /tmp/output/
+          echo ""
+          echo "=== 视频信息 ==="
+          ffprobe -v quiet -print_format json -show_format -show_streams /tmp/output/video_lecture.mp4 2>/dev/null | head -20 || true
+
+      - name: ⬆️ Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: truth-video-output
+          path: /tmp/output/*.mp4
+          compression-level: 0
+
+      - name: 📋 Summary
+        run: |
+          echo "## ✅ 渲染完成" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 设置 | 值 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🎭 讲师 | ${{ inputs.persona }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🎨 模板 | ${{ inputs.template }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ⚡ 画质 | ${{ inputs.quality }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔍 校验 | ${{ inputs.truth_mode }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "下载 Artifacts 中的视频文件 ⬇️" >> $GITHUB_STEP_SUMMARY

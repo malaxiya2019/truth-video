@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "marked": "^16.0.0",
+    "openai": "^6.45.0",
     "playwright": "^1.52.0",
     "puppeteer-core": "^24.0.0"
   }

@@ -3,15 +3,6 @@ import fs from "fs";
 
 /**
  * 最终编码: PNG帧 + 过渡动画 + 文字烧录 + 音频 → MP4
- *
- * 核心改进 (V0.5+):
- *   - 每帧按场景时长独立延展 (不再是固定 1fps)
- *   - fade in/out 过渡动画 (0.5s 淡入淡出)
- *   - drawtext 文字烧录 (中文文泉驿, 英文 DejaVu)
- *   - 音频混音
- *
- * 注意: 旧版 encodeVideo / encodeVideoSilent / mergeAudio 已移除，
- *       统一使用 encodeFromConcat（帧序列 concat 文件 + 画质选项）。
  */
 
 /**
@@ -27,27 +18,29 @@ export function encodeFromConcat(concatFile, audioFile, outFile = "output/video.
     throw new Error(`Concat file not found: ${concatFile}`);
   }
 
-  const audioInput = audioFile && fs.existsSync(audioFile) ? `-i "${audioFile}"` : "";
+  const audioInput = audioFile && fs.existsSync(audioFile) ? ` -i "${audioFile}"` : "";
   const audioMap = audioInput ? "-map 1:a" : "";
 
-  // 使用画质配置或默认
+  // 默认编码参数
   let videoCodec = "-c:v libx264 -preset medium -crf 23";
   let audioCodec = audioInput ? "-c:a aac -b:a 128k" : "";
-  let scaleFilter = "";
-  let pixelFmt = "-pix_fmt yuv420p";
+
+  // 始终使用 yuv420p — 安卓播放器兼容 (不支持 yuv444p)
+  let vf = "-pix_fmt yuv420p";
 
   if (qualityOpt) {
     videoCodec = qualityOpt.videoArgs;
     audioCodec = qualityOpt.audioArgs || audioCodec;
-    // sizeArgs 已经是完整 -vf 字符串, 需要提取 scale= 部分
+
+    // 提取缩放参数
     const sizeMatch = qualityOpt.sizeArgs?.match(/scale=([^ ]+)/);
-    if (sizeMatch) scaleFilter = `scale=${sizeMatch[1]}`;
-    if (qualityOpt.encoder?.hw) pixelFmt = "";
+    if (sizeMatch) {
+      // 缩放 + yuv420p 像素格式转换
+      vf = `-vf "scale=${sizeMatch[1]},format=yuv420p"`;
+    }
+
     console.log(`   🎬 ${qualityOpt.quality.width}x${qualityOpt.quality.height} | ${qualityOpt.encoder.codec} | CRF ${qualityOpt.quality.crf}`);
   }
-
-  // 简单缩放, 不 pad (NVENC 兼容)
-  const vf = scaleFilter ? `-vf "${scaleFilter}"` : pixelFmt;
 
   const cmd =
     `ffmpeg -y -f concat -safe 0 -i "${concatFile}" ${audioInput} ` +

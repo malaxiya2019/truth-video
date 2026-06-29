@@ -201,3 +201,41 @@ PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## 📄 License / 许可证
 
 [MIT](LICENSE) © malaxiya2019
+
+---
+
+## ☁️ 云渲染 (免安装本地环境)
+
+不需要在本地装 Node.js/ffmpeg/Python，直接在 GitHub 云端渲染：
+
+### 方法 1: GitHub Actions Web 界面
+
+1. 打开仓库 → **Actions** → **Render Video**
+2. 点击 **Run workflow**
+3. 填写 Markdown 内容或选择文件
+4. 选择讲师人格、视觉模板、画质
+5. 点击绿色 **Run workflow** 按钮
+6. 等待 3-8 分钟，从 **Artifacts** 下载视频
+
+### 方法 2: 安卓 APK (推荐)
+
+在 GitHub Actions 中运行 **Build APK** 工作流，编译出独立安卓安装包。
+
+APK 无需 Termux/Node.js，只需要一个 GitHub Token 即可使用云渲染功能。
+
+**使用流程：**
+```
+安装 APK → 输入 GitHub Token → 写 Markdown → 云端渲染 → 下载视频
+```
+
+详见 [android/README.md](android/README.md)
+
+### 方法 3: 命令行触发
+
+```bash
+gh workflow run render.yml \
+  -f markdown="# 标题\n\n## 场景1\n内容..." \
+  -f persona=professor \
+  -f template=dark \
+  -f quality=draft
+```

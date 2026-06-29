@@ -166,15 +166,15 @@ class RenderEngine(private val context: Context) {
 
     private fun initTts(): TextToSpeech? {
         val d = CompletableDeferred<TextToSpeech?>()
-        TextToSpeech(context) { s ->
-            if (s == TextToSpeech.SUCCESS) {
-                it?.let { t ->
-                    t.language = Locale.CHINESE
-                    t.setSpeechRate(1.0f)
-                    t.setPitch(1.0f)
-                    d.complete(t)
-                } ?: d.complete(null)
-            } else d.complete(null)
+        val tts = TextToSpeech(context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                tts.language = Locale.CHINESE
+                tts.setSpeechRate(1.0f)
+                tts.setPitch(1.0f)
+                d.complete(tts)
+            } else {
+                d.complete(null)
+            }
         }
         return runBlocking { d.await() }
     }
@@ -341,7 +341,7 @@ class RenderEngine(private val context: Context) {
 
     private fun makeScene(title: String, body: StringBuilder): Scene {
         val bt = body.toString().trim()
-        val len = "$title。$bt".replace("\\s".toRegex(), "").length
+        val len = "$title。$bt".replace(Regex("\\s"), "").length
         return Scene(title, bt, maxOf(3000, len * 250))
     }
 

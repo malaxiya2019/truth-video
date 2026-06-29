@@ -6,8 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +21,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 🛡️ 启动安全检测
+        try {
+            SecurityGuard(this).runAllChecks()
+        } catch (e: SecurityException) {
+            // 安全检测失败，警告用户并退出
+            AlertDialog.Builder(this)
+                .setTitle("🔒 安全警告")
+                .setMessage("${e.message}\n\n应用已锁定，请从官方渠道重新安装。")
+                .setPositiveButton("退出") { _, _ -> finishAffinity() }
+                .setCancelable(false)
+                .show()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         mdInput = findViewById(R.id.mdInput)
@@ -35,22 +50,17 @@ class MainActivity : AppCompatActivity() {
             themeSpinner.adapter = it
         }
 
-        // 预填示例内容
-        mdInput.setText(getString(R.string.demo_md))
-
         renderBtn.setOnClickListener {
             val md = mdInput.text.toString().trim()
             if (md.isEmpty()) {
                 setStatus("⚠️ 请输入 Markdown 内容")
                 return@setOnClickListener
             }
-
             val theme = when (themeSpinner.selectedItemPosition) {
                 1 -> "dark"
                 2 -> "minimal"
                 else -> "tech"
             }
-
             startRender(md, theme)
         }
     }
@@ -62,9 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         renderEngine?.cancel()
         renderEngine = RenderEngine(this).apply {
-            onProgress = { msg ->
-                runOnUiThread { setStatus(msg) }
-            }
+            onProgress = { msg -> runOnUiThread { setStatus(msg) } }
             onComplete = { file ->
                 runOnUiThread {
                     lastVideoFile = file
@@ -82,27 +90,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        renderEngine?.start(RenderEngine.Params(
-            markdown = md,
-            theme = theme
-        ))
+        renderEngine?.start(RenderEngine.Params(markdown = md, theme = theme))
     }
 
-    private fun setStatus(msg: String) {
-        statusTv.text = msg
-    }
+    private fun setStatus(msg: String) { statusTv.text = msg }
 
     private fun showVideo(file: File) {
         try {
             val uri = Uri.fromFile(file)
-            val intent = Intent(Intent.ACTION_VIEW).apply {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
                 setDataAndType(uri, "video/mp4")
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            startActivity(Intent.createChooser(intent, "打开视频"))
-        } catch (e: Exception) {
+            })
+        } catch (_: Exception) {
             setStatus("✅ 视频已保存到 Movies/TruVid/\n${file.name}")
         }
     }

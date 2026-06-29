@@ -28,14 +28,13 @@ jobs:
           echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
 
-      - name: 🏗 Build APK
+      - name: 🏗 Build APK (Release - 含混淆加固)
         working-directory: ./android
         run: |
           echo "sdk.dir=/usr/local/lib/android/sdk" > local.properties
-          # Download gradle wrapper
           curl -sL "https://services.gradle.org/distributions/gradle-8.5-bin.zip" -o /tmp/gradle.zip
           unzip -qo /tmp/gradle.zip -d /tmp/gradle
-          /tmp/gradle/gradle-8.5/bin/gradle assembleDebug --no-daemon --info
+          /tmp/gradle/gradle-8.5/bin/gradle assembleRelease --no-daemon --info
 
       - name: 📦 Locate APK
         run: |
@@ -49,3 +48,19 @@ jobs:
           path: |
             ./android/app/build/outputs/apk/**/*.apk
           if-no-files-found: error
+
+      - name: 📋 Summary
+        run: |
+          echo "## ✅ TruVid ${{ inputs.version }} 编译完成" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🛡️ 安全加固已启用" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ ProGuard/R8 代码混淆" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Root 检测" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 模拟器检测" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 反调试检测" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ APK 完整性校验" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 签名篡改检测" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 包名校验" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 资源压缩" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "下载 APK 安装到手机即可使用 ⬇️" >> $GITHUB_STEP_SUMMARY

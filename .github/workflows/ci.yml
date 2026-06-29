@@ -18,14 +18,13 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: truth-video/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm --prefix truth-video install --ignore-scripts
+        run: npm install --ignore-scripts
 
       - name: Install Chromium
         run: npx playwright install chromium
-        working-directory: truth-video
 
       - name: Install system dependencies
         run: |
@@ -36,10 +35,10 @@ jobs:
         run: pip3 install edge-tts
 
       - name: Run tests
-        run: npm --prefix truth-video test
+        run: npm test
 
       - name: Test rendering (draft)
-        run: node truth-video/src/cli.js truth-video/examples/demo.md --out=/tmp/test-render --quality=draft --truth-mode=off
+        run: node src/cli.js examples/demo.md --out=/tmp/test-render --quality=draft --truth-mode=off
         timeout-minutes: 10
 
       - name: Verify output
@@ -67,8 +66,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: truth-video
-          file: truth-video/Dockerfile
+          context: .
+          file: Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest

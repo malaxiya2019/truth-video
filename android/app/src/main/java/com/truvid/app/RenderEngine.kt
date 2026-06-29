@@ -165,18 +165,18 @@ class RenderEngine(private val context: Context) {
     // ═══════════════════════════════════════════════════
 
     private fun initTts(): TextToSpeech? {
-        val d = CompletableDeferred<TextToSpeech?>()
+        val d = CompletableDeferred<Boolean>()
         val tts = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                tts.language = Locale.CHINESE
-                tts.setSpeechRate(1.0f)
-                tts.setPitch(1.0f)
-                d.complete(tts)
-            } else {
-                d.complete(null)
-            }
+            d.complete(status == TextToSpeech.SUCCESS)
         }
-        return runBlocking { d.await() }
+        val ok = runBlocking { try { d.await() } catch (_: Exception) { false } }
+        if (ok) {
+            tts.language = Locale.CHINESE
+            tts.setSpeechRate(1.0f)
+            tts.setPitch(1.0f)
+            return tts
+        }
+        return null
     }
 
     /** 合成单段文本到 WAV 文件（每场景一段，永不超长） */

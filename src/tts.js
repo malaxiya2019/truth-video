@@ -9,7 +9,7 @@ import os from "os";
  * 引擎优先级:
  *   1. edge-tts — 微软神经语音, 中英文都好, 免费
  *   2. OPENAI_API_KEY — OpenAI TTS (需付费)
- *   3. espeak — 降级, 机器人音
+ *   3. espeak — 降级, 机器人音 (Termux 可用)
  */
 
 let _ttsEngine = null;
@@ -17,9 +17,11 @@ let _ttsEngine = null;
 function detectTTS() {
   if (_ttsEngine) return _ttsEngine;
 
+  // edge-tts: 仅检测二进制是否存在, 不联网查询列表 (避免超时)
   try {
     execSync("which edge-tts", { stdio: "pipe" });
-    execSync("edge-tts --list-voices 2>/dev/null | head -1", { stdio: "pipe", timeout: 10_000 });
+    // 快速验证: 仅请求1行帮助
+    execSync("edge-tts --help 2>/dev/null | head -1", { stdio: "pipe", timeout: 5_000 });
     _ttsEngine = "edge";
     return _ttsEngine;
   } catch {}
@@ -31,41 +33,30 @@ function detectTTS() {
   return _ttsEngine;
 }
 
-/**
- * 检测文本是否包含中文
- */
 function hasChinese(text) {
   return /[\u4e00-\u9fff]/.test(text);
 }
 
-/**
- * 根据文本内容选择最佳语音
- */
 function pickVoice(text) {
-  if (hasChinese(text)) return "zh-CN-XiaoxiaoNeural";  // 中文女声, 自然
-  return "en-US-AriaNeural";                              // 英文女声, 自然
+  if (hasChinese(text)) return "zh-CN-XiaoxiaoNeural";
+  return "en-US-AriaNeural";
 }
 
 async function generateAudio(text, out, index) {
   const engine = detectTTS();
 
-  // ── edge-tts (首选) ──
   if (engine === "edge") {
     try {
       const voice = pickVoice(text);
       const tmpMp3 = out.replace(/\.wav$/, ".mp3");
-
       execSync(
         `edge-tts --voice "${voice}" --text "${text.replace(/"/g, '\\"')}" --write-media "${tmpMp3}"`,
-        { stdio: "ignore", timeout: 30_000 }
+        { stdio: "ignore", timeout: 60_000 }
       );
-
-      // mp3 → wav
       execSync(
         `ffmpeg -y -i "${tmpMp3}" -ac 1 -ar 22050 "${out}"`,
         { stdio: "ignore", timeout: 10_000 }
       );
-
       try { fs.unlinkSync(tmpMp3); } catch {}
       console.log(`  [${index}] edge-tts (${voice}) → ${path.basename(out)}`);
       return;
@@ -74,15 +65,12 @@ async function generateAudio(text, out, index) {
     }
   }
 
-  // ── OpenAI TTS ──
   if (process.env.OPENAI_API_KEY) {
     try {
       const { default: OpenAI } = await import("openai");
       const openai = new OpenAI();
       const resp = await openai.audio.speech.create({
-        model: "tts-1",
-        voice: "alloy",
-        input: text,
+        model: "tts-1", voice: "alloy", input: text,
       });
       const buffer = Buffer.from(await resp.arrayBuffer());
       fs.writeFileSync(out, buffer);
@@ -93,7 +81,6 @@ async function generateAudio(text, out, index) {
     }
   }
 
-  // ── espeak ──
   if (engine === "espeak") {
     const tmp = path.join(os.tmpdir(), `tts_${index}.txt`);
     fs.writeFileSync(tmp, text, "utf8");
@@ -103,7 +90,6 @@ async function generateAudio(text, out, index) {
     return;
   }
 
-  // ── say (macOS) ──
   if (engine === "say") {
     execSync(
       `say -o "${out}" --data-format=LEI16@22050 "${text}"`,
@@ -113,7 +99,6 @@ async function generateAudio(text, out, index) {
     return;
   }
 
-  // ── 静音降级 ──
   console.log(`  [${index}] (no TTS engine) → silence`);
   execSync(
     `ffmpeg -y -f lavfi -i anullsrc=r=22050:cl=mono -t 3 "${out}"`,
@@ -121,13 +106,6 @@ async function generateAudio(text, out, index) {
   );
 }
 
-/**
- * 为所有场景生成音频
- *
- * @param {Array<{title:string, body:string}>} scenes
- * @param {string} dir
- * @returns {string[]} 音频文件路径列表
- */
 export async function generateAllAudio(scenes, dir = "renders") {
   fs.mkdirSync(dir, { recursive: true });
   const files = [];

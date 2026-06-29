@@ -1,6 +1,6 @@
 {
-  "name": "TruthVideo 教学视频编译器",
-  "short_name": "TruthVideo",
+  "name": "TruVid 教学视频编译器",
+  "short_name": "TruVid",
   "description": "把 Markdown 转成带知识图谱动画的 AI 教学视频",
   "start_url": "/",
   "display": "standalone",

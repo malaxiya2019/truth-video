@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.truthvideo.app"
+    namespace = "com.truvid.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.truthvideo.app"
+        applicationId = "com.truvid.app"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

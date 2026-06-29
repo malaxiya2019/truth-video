@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TruthVideo</string>
+    <string name="app_name">TruVid</string>
     <string name="demo_md"># 智械与现实的交锋
 
 ## 绝对去污剂的思想实验
@@ -18,6 +18,5 @@
 ## 实战：Celery 崩溃排查
 
 Celery Worker 执行 PyMuPDF 解析 PDF 时闪退，exit code 139。
-容器环境与 Celery 多进程机制在调用 C/C++ 动态链接库时发生冲突。
-解决方案：把 import fitz 移入 task 函数内部延迟初始化。</string>
+容器环境与 Celery 多进程机制在调用 C/C++ 动态链接库时发生冲突。</string>
 </resources>

@@ -1,11 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# TruthVideo App Launcher
+# TruVid App Launcher
 # 用法: bash start-app.sh
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 PORT=${PORT:-3456}
 
-echo "  🎓 TruthVideo 启动中..."
+echo "  🎓 TruVid 启动中..."
 echo ""
 
 # 检查 ffmpeg

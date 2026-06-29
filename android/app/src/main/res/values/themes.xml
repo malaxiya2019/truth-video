@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.TruthVideo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.TruVid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#FF58A6FF</item>
         <item name="colorPrimaryVariant">#FF1F6FEB</item>
         <item name="colorOnPrimary">#FFFFFFFF</item>

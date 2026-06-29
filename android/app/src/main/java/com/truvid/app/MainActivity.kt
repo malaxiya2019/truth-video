@@ -1,4 +1,4 @@
-package com.truthvideo.app
+package com.truvid.app
 
 import android.content.Intent
 import android.net.Uri
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(Intent.createChooser(intent, "打开视频"))
         } catch (e: Exception) {
-            setStatus("✅ 视频已保存到 Movies/TruthVideo/\n${file.name}")
+            setStatus("✅ 视频已保存到 Movies/TruVid/\n${file.name}")
         }
     }
 

@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:label="TruthVideo"
+        android:label="TruVid"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TruthVideo">
+        android:theme="@style/Theme.TruVid">
 
         <activity
             android:name=".MainActivity"

@@ -1,4 +1,4 @@
-package com.truthvideo.app
+package com.truvid.app
 
 import android.content.Context
 import android.graphics.*
@@ -73,7 +73,7 @@ class RenderEngine(private val context: Context) {
 
         val totalMs = scenes.sumOf { it.durationMs }
         val totalFrames = totalMs * params.fps / 1000
-        val outDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "TruthVideo")
+        val outDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "TruVid")
         outDir.mkdirs()
         val mp4File = File(outDir, "TV_${System.currentTimeMillis()}.mp4")
 

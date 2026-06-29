@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "Turn Markdown into AI-generated educational videos with knowledge graph animations / 把Markdown编译成带知识图谱动画的AI教学视频",
   "type": "module",
-  "keywords": ["video", "education", "knowledge-graph", "ai", "markdown", "tts", "animation"],
+  "keywords": [
+    "video",
+    "education",
+    "knowledge-graph",
+    "ai",
+    "markdown",
+    "tts",
+    "animation"
+  ],
   "author": "malaxiya2019",
   "license": "MIT",
   "repository": {
@@ -22,6 +30,7 @@
   },
   "dependencies": {
     "marked": "^16.0.0",
-    "playwright": "^1.52.0"
+    "playwright": "^1.52.0",
+    "puppeteer-core": "^24.0.0"
   }
 }

@@ -350,28 +350,34 @@ class RenderEngine(private val context: Context) {
     // ═══════════════════════════════════════════════════
 
     private fun generateHtml(scenes: List<Scene>, p: Params): String {
-        val vars = mapOf(
-            "tech" to "--bg:#0a1628;--text:#e0e8f0;--accent:#58a6ff;--secondary:#8b949e;--card:#0d1a31",
-            "dark" to "--bg:#0d1117;--text:#e6edf3;--accent:#58a6ff;--secondary:#8b949e;--card:#161b22",
-            "minimal" to "--bg:#ffffff;--text:#24292f;--accent:#0969da;--secondary:#656d76;--card:#f6f8fa"
-        )[p.theme] ?: "--bg:#0a1628;--text:#e0e8f0;--accent:#58a6ff;--secondary:#8b949e;--card:#0d1a31"
+        val bg = if (p.theme == "dark") "#0d1117" else if (p.theme == "minimal") "#ffffff" else "#0a1628"
+        val txt = if (p.theme == "minimal") "#24292f" else "#e6edf3"
+        val acc = if (p.theme == "minimal") "#0969da" else "#58a6ff"
+        val sec = if (p.theme == "minimal") "#656d76" else "#8b949e"
+        // card unused
 
-        val divs = scenes.joinToString("\n") { s ->
-            val eb = s.body.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
-            """<div class="s"><div class="st">${s.title}</div>${if(eb.isNotBlank())"<div class=\"sb\">$eb</div>"else""}</div>"""
+        val sb = StringBuilder()
+        sb.append("<!DOCTYPE html>\n<html><head><meta charset=utf-8><style>\n")
+        sb.append("*{margin:0;padding:0;box-sizing:border-box}\n")
+        sb.append("body{background:").append(bg).append(";color:").append(txt).append(";font-family:sans-serif;")
+        sb.append("width:").append(p.width).append("px}\n")
+        sb.append(".s{width:").append(p.width).append("px;height:").append(p.height).append("px;")
+        sb.append("display:flex;flex-direction:column;justify-content:center;padding:40px 60px}\n")
+        sb.append(".st{font-size:36px;font-weight:bold;color:").append(acc).append(";line-height:1.3}\n")
+        sb.append(".sb{margin-top:16px;font-size:20px;color:").append(sec).append(";line-height:1.6}\n")
+        sb.append("</style></head><body>\n")
+        for (s in scenes) {
+            val eb = s.body.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            sb.append("<div class=s><div class=st>").append(s.title).append("</div>")
+            if (eb.isNotBlank()) {
+                sb.append("<div class=sb>").append(eb).append("</div>")
+            }
+            sb.append("</div>\n")
         }
-        return """<!DOCTYPE html>
-<html><head><meta charset="utf-8"><style>
-:root{$vars}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,sans-serif;width:${p.width}px}
-.s{width:${p.width}px;height:${p.height}px;display:flex;flex-direction:column;justify-content:center;padding:40px 60px}
-.st{font-size:36px;font-weight:bold;color:var(--accent);line-height:1.3}
-.sb{margin-top:16px;font-size:20px;color:var(--secondary);line-height:1.6}
-</style></head><body>
-$divs
-<script>function showScene(i){document.querySelectorAll('.s').forEach((e,idx)=>{e.style.display=idx===i?'flex':'none'})}showScene(0)</script>
-</body></html>"""
+        sb.append("<script>function showScene(i){document.querySelectorAll('.s').forEach(function(e,idx){")
+        sb.append("e.style.display=idx===i?'flex':'none'})}showScene(0)</script>\n")
+        sb.append("</body></html>")
+        return sb.toString()
     }
 
     // ═══════════════════════════════════════════════════

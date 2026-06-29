@@ -32,6 +32,7 @@ class SecurityGuard(private val context: Context) {
         checkEmulator()
         checkDebugger()
         checkPackageName()
+        checkAppName()
         checkApkIntegrity()
         checkAppSignature()
     }
@@ -273,4 +274,25 @@ class SecurityGuard(private val context: Context) {
             false
         }
     }
+    // ══════════════════════════════════════════════
+    //  核心四：APK 名称保护（防重打包改名）
+    // ══════════════════════════════════════════════
+
+    private val EXPECTED_APP_NAME = "TruVid"
+
+    private fun checkAppName() {
+        val appInfo = context.applicationInfo
+        val label = context.packageManager.getApplicationLabel(appInfo)?.toString()
+        if (label != null && label != EXPECTED_APP_NAME) {
+            // 检查是否在资源中预埋了名称
+            val resId = context.resources.getIdentifier("app_name", "string", context.packageName)
+            if (resId != 0) {
+                val resName = context.getString(resId)
+                if (resName != EXPECTED_APP_NAME) {
+                    onThreat("应用名称被篡改: $label (期望: $EXPECTED_APP_NAME)")
+                }
+            }
+        }
+    }
+
 }

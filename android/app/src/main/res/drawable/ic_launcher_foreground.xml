@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
-    <path android:fillColor="#FF58A6FF" android:pathData="M36,38L72,54L36,70Z"/>
-    <path android:fillColor="#FF58A6FF" android:pathData="M30,32h48v4H30z M30,72h48v4H30z"/>
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 外圈光环 -->
+    <path
+        android:fillColor="#00FFFFFF"
+        android:strokeColor="#FF58A6FF"
+        android:strokeWidth="1.5"
+        android:pathData="M54,18A36,36 0,1,1 53.9,18Z"
+        android:alpha="0.3"/>
+
+    <!-- 内圈 -->
+    <path
+        android:fillColor="#00FFFFFF"
+        android:strokeColor="#FF58A6FF"
+        android:strokeWidth="1"
+        android:pathData="M54,24A30,30 0,1,1 53.9,24Z"
+        android:alpha="0.5"/>
+
+    <!-- 六边形底框 -->
+    <path
+        android:fillColor="#FF1a2a4a"
+        android:strokeColor="#FF58A6FF"
+        android:strokeWidth="1.5"
+        android:pathData="M54,32 L72,42 L72,62 L54,72 L36,62 L36,42 Z"/>
+
+    <!-- 播放三角 -->
+    <path
+        android:fillColor="#FF58A6FF"
+        android:pathData="M47,43 L65,54 L47,65 Z"/>
+
+    <!-- T 字母 -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M44,36 L64,36 L64,39.5 L55.5,39.5 L55.5,52 L52.5,52 L52.5,39.5 L44,39.5 Z"/>
+
+    <!-- 底部小字装饰 -->
+    <path
+        android:fillColor="#FF58A6FF"
+        android:pathData="M40,76 L48,76 L48,78 L40,78 Z"
+        android:alpha="0.6"/>
+    <path
+        android:fillColor="#FF58A6FF"
+        android:pathData="M51,76 L68,76 L68,78 L51,78 Z"
+        android:alpha="0.4"/>
+
+    <!-- 装饰亮点 -->
+    <circle
+        android:fillColor="#FF58A6FF"
+        android:cx="72"
+        android:cy="38"
+        android:r="1.5"
+        android:alpha="0.8"/>
+    <circle
+        android:fillColor="#FF3FB950"
+        android:cx="36"
+        android:cy="68"
+        android:r="1"
+        android:alpha="0.6"/>
 </vector>

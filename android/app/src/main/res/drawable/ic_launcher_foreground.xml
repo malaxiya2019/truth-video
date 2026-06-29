@@ -10,7 +10,7 @@
         android:fillColor="#00FFFFFF"
         android:strokeColor="#FF58A6FF"
         android:strokeWidth="1.5"
-        android:pathData="M54,18A36,36 0,1,1 53.9,18Z"
+        android:pathData="M54,18 A36,36 0,1,1 53.9,18 Z"
         android:alpha="0.3"/>
 
     <!-- 内圈 -->
@@ -18,7 +18,7 @@
         android:fillColor="#00FFFFFF"
         android:strokeColor="#FF58A6FF"
         android:strokeWidth="1"
-        android:pathData="M54,24A30,30 0,1,1 53.9,24Z"
+        android:pathData="M54,24 A30,30 0,1,1 53.9,24 Z"
         android:alpha="0.5"/>
 
     <!-- 六边形底框 -->
@@ -38,7 +38,7 @@
         android:fillColor="#FFFFFFFF"
         android:pathData="M44,36 L64,36 L64,39.5 L55.5,39.5 L55.5,52 L52.5,52 L52.5,39.5 L44,39.5 Z"/>
 
-    <!-- 底部小字装饰 -->
+    <!-- 底部线条装饰 -->
     <path
         android:fillColor="#FF58A6FF"
         android:pathData="M40,76 L48,76 L48,78 L40,78 Z"
@@ -48,17 +48,15 @@
         android:pathData="M51,76 L68,76 L68,78 L51,78 Z"
         android:alpha="0.4"/>
 
-    <!-- 装饰亮点 -->
-    <circle
+    <!-- 装饰亮点 (右上) -->
+    <path
         android:fillColor="#FF58A6FF"
-        android:cx="72"
-        android:cy="38"
-        android:radius="1.5"
+        android:pathData="M71,37 A1.5,1.5 0,1,1 71,36.9 Z"
         android:alpha="0.8"/>
-    <circle
+
+    <!-- 装饰亮点 (左下) -->
+    <path
         android:fillColor="#FF3FB950"
-        android:cx="36"
-        android:cy="68"
-        android:radius="1"
+        android:pathData="M35,67 A1,1 0,1,1 35,66.9 Z"
         android:alpha="0.6"/>
 </vector>

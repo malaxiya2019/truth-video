@@ -53,12 +53,12 @@
         android:fillColor="#FF58A6FF"
         android:cx="72"
         android:cy="38"
-        android:r="1.5"
+        android:radius="1.5"
         android:alpha="0.8"/>
     <circle
         android:fillColor="#FF3FB950"
         android:cx="36"
         android:cy="68"
-        android:r="1"
+        android:radius="1"
         android:alpha="0.6"/>
 </vector>

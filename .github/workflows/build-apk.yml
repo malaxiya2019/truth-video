@@ -1,19 +1,22 @@
 # ===================================================
-# 📦 TruthVideo APK 编译工作流
-# 在 GitHub 云端编译安卓 APK
-# 完全独立运行，只需 GitHub Token
+# 📦 TruthVideo 独立 APK 编译工作流
+# 构建完全离线运行的 Android App
+# 不依赖 Termux / 云端 / 外部服务
 # ===================================================
 
-name: 📦 Build APK
+name: 📦 Build Standalone APK
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: '📱 APK 版本号'
+        description: '版本号'
         required: true
         default: '1.0.0'
-        type: string
+      include_demo:
+        description: '包含示例 Markdown'
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -30,62 +33,46 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
-      - name: 🤖 Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: 🤖 Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-      - name: ⚙️ Build APK with Gradle
+      - name: 🔧 Setup Android SDK
+        run: |
+          # GitHub Actions runner has Android SDK pre-installed
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          ls $ANDROID_HOME/platforms/ 2>/dev/null || echo "No platforms yet"
+
+      - name: 🏗 Build APK
         working-directory: ./android
         run: |
-          # 创建 local.properties 指向 Android SDK
-          echo "sdk.dir=$ANDROID_HOME" > local.properties
-
-          # 下载 Gradle Wrapper（因为我们的仓库没有 jar）
-          cd gradle/wrapper
-          curl -sL "https://services.gradle.org/distributions/gradle-8.5-bin.zip" -o gradle.zip || true
-          cd ../..
-
-          # 直接用 Android 的 gradle
-          chmod +x $ANDROID_HOME/tools/bin/sdkmanager 2>/dev/null || true
-
-          # 使用 gradle 命令
-          which gradle && gradle --version || true
-
-          # 下载 gradle wrapper 并构建
-          curl -sL "https://raw.githubusercontent.com/gradle/gradle/v8.5.0/gradlew" -o gradlew
-          chmod +x gradlew
-          ./gradlew assembleRelease --no-daemon 2>&1 || {
-            echo "尝试 assembleDebug..."
-            ./gradlew assembleDebug --no-daemon 2>&1
-          }
+          # Create local.properties
+          echo "sdk.dir=${ANDROID_HOME:-/usr/local/lib/android/sdk}" > local.properties
+          # Build debug APK (no signing needed)
+          gradle assembleDebug --no-daemon --info
 
       - name: 📦 Locate APK
         run: |
-          echo "=== 搜索 APK ==="
-          find ./android -name "*.apk" 2>/dev/null || echo "未找到 APK"
-          find ./android -name "*.apk" -exec ls -lh {} \; 2>/dev/null
+          echo "=== APK 文件 ==="
+          find ./android -name "*.apk" -exec ls -lh {} \; 2>/dev/null || echo "未找到 APK"
 
       - name: ⬆️ Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: TruthVideo-v${{ inputs.version }}-APK
+          name: TruthVideo-Standalone-v${{ inputs.version }}
           path: |
             ./android/app/build/outputs/apk/**/*.apk
-          if-no-files-found: warn
+          if-no-files-found: error
 
       - name: 📋 Summary
         run: |
-          echo "## ✅ APK 编译完成" >> $GITHUB_STEP_SUMMARY
+          echo "## ✅ TruthVideo 独立 APK 编译完成" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| 项目 | 值 |" >> $GITHUB_STEP_SUMMARY
-          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
-          echo "| 📱 版本 | ${{ inputs.version }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🏗 编译环境 | Ubuntu + Android SDK |" >> $GITHUB_STEP_SUMMARY
+          echo "### 📱 特性" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 完全离线运行，无需网络" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 不依赖 Termux / Node.js / ffmpeg" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 使用 Android 原生 API 渲染视频" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ WebView → Canvas 截帧" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Android TTS → 语音合成" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ MediaCodec → H.264 编码" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "下载 Artifacts 中的 APK 文件 ⬇️" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 使用方法" >> $GITHUB_STEP_SUMMARY
-          echo "1. 下载 APK 到手机" >> $GITHUB_STEP_SUMMARY
-          echo "2. 安装 APK（允许未知来源）" >> $GITHUB_STEP_SUMMARY
-          echo "3. 打开 TruthVideo App" >> $GITHUB_STEP_SUMMARY
-          echo "4. 输入 GitHub Token 和 Markdown 内容" >> $GITHUB_STEP_SUMMARY
-          echo "5. 点击「开始渲染」，云端渲染完成后下载视频" >> $GITHUB_STEP_SUMMARY
+          echo "下载 APK 文件安装到手机即可使用 ⬇️" >> $GITHUB_STEP_SUMMARY

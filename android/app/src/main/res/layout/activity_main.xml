@@ -1,258 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#FF0D1117"
     android:padding="16dp">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎓 TruthVideo"
+        android:textSize="24sp"
+        android:textColor="#FF58A6FF"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="离线教学视频渲染器"
+        android:textSize="13sp"
+        android:textColor="#FF8B949E"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📝 Markdown 内容"
+        android:textColor="#FFE6EDF3"
+        android:textSize="14sp"
+        android:layout_marginBottom="6dp"/>
+
+    <EditText
+        android:id="@+id/mdInput"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FF161B22"
+        android:gravity="top"
+        android:padding="12dp"
+        android:scrollbars="vertical"
+        android:textColor="#FFE6EDF3"
+        android:textColorHint="#FF8B949E"
+        android:textSize="12sp"
+        android:inputType="textMultiLine"
+        android:hint="# 标题\n\n## 场景1\n内容..."/>
+
+    <Spinner
+        android:id="@+id/themeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:background="#FF161B22"/>
+
+    <Button
+        android:id="@+id/renderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FF58A6FF"
+        android:text="🚀 开始渲染"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/statusTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:padding="12dp"
+        android:background="#FF161B22"
+        android:text="💡 输入 Markdown，点击开始"
+        android:textColor="#FF8B949E"
+        android:textSize="13sp"
+        android:minHeight="48dp"/>
 
-        <!-- Header -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🎓 TruthVideo"
-            android:textSize="28sp"
-            android:textColor="#FF58A6FF"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="知识图谱教学视频云编译器"
-            android:textSize="14sp"
-            android:textColor="#FF8B949E"
-            android:layout_marginBottom="20dp"/>
-
-        <!-- GitHub Token -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#FF58A6FF"
-            app:hintTextColor="#FF8B949E">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tokenInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="🔑 GitHub Token (settings → tokens)"
-                android:textColor="#FFE6EDF3"
-                android:textColorHint="#FF8B949E"
-                android:textSize="13sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Repo -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#FF58A6FF"
-            app:hintTextColor="#FF8B949E">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/repoInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="malaxiya2019/truth-video"
-                android:hint="📦 GitHub 仓库 (owner/repo)"
-                android:textColor="#FFE6EDF3"
-                android:textColorHint="#FF8B949E"
-                android:textSize="13sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Markdown Input -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📝 Markdown 内容"
-            android:textColor="#FFE6EDF3"
-            android:textSize="14sp"
-            android:layout_marginBottom="6sp"/>
-
-        <EditText
-            android:id="@+id/markdownInput"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#FF161B22"
-            android:gravity="top"
-            android:hint="# 标题\n\n## 场景1\n内容..."
-            android:padding="12dp"
-            android:scrollbars="vertical"
-            android:textColor="#FFE6EDF3"
-            android:textColorHint="#FF8B949E"
-            android:textSize="12sp"
-            android:inputType="textMultiLine"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Options Row 1 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="12dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginEnd="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🎭 讲师"
-                    android:textColor="#FF8B949E"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
-
-                <Spinner
-                    android:id="@+id/personaSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="#FF161B22"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🎨 模板"
-                    android:textColor="#FF8B949E"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
-
-                <Spinner
-                    android:id="@+id/templateSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="#FF161B22"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Options Row 2 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="20dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginEnd="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="⚡ 画质"
-                    android:textColor="#FF8B949E"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
-
-                <Spinner
-                    android:id="@+id/qualitySpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="#FF161B22"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔍 校验"
-                    android:textColor="#FF8B949E"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
-
-                <Spinner
-                    android:id="@+id/truthSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="#FF161B22"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="16dp">
-
-            <Button
-                android:id="@+id/renderButton"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="#FF58A6FF"
-                android:text="🚀 开始渲染"
-                android:textColor="#FFFFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/downloadButton"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:backgroundTint="#FF3FB950"
-                android:text="⬇️ 下载视频"
-                android:textColor="#FFFFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <!-- Status -->
-        <TextView
-            android:id="@+id/statusText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="💡 输入 Markdown 内容，点击开始渲染"
-            android:textColor="#FF8B949E"
-            android:textSize="13sp"
-            android:padding="12dp"
-            android:background="#FF161B22"
-            android:layout_marginBottom="20dp"/>
-
-        <!-- Tip -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="💡 提示：视频在 GitHub Actions 云端渲染（约3-8分钟），完成后从 Artifacts 下载。需要先在 GitHub Settings → Developer settings → Personal access tokens 创建 Token。"
-            android:textColor="#FF8B949E"
-            android:textSize="11sp"
-            android:lineSpacingExtra="3dp"
-            android:padding="12dp"
-            android:background="#FF161B22"/>
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

@@ -1,41 +1,44 @@
-# TruthVideo Android App
+# TruthVideo 独立安卓 APK
 
-TruthVideo 的安卓客户端。通过 GitHub Actions 云渲染，无需在手机上安装 Node.js/ffmpeg。
+完全离线的教学视频渲染器，无需 Termux / 云服务 / 外部依赖。
 
-## 工作原理
+## 原理
 
 ```
-你的手机 (APK)                    GitHub 云端 (Actions)              你的手机 (APK)
-    │                                   │                               │
-    ├─ 输入 Markdown ──────────────────►│                               │
-    │                                   ├─ 安装依赖 (Node/ffmpeg/...)   │
-    │                                   ├─ 渲染视频                     │
-    │                                   ├─ 上传 Artifact                │
-    │                                   │                               │
-    │◄────── 下载视频 ──────────────────┤                               │
+你的 Markdown
+     │
+     ▼
+┌─────────────────────────────────┐
+│ WebView (内置 V8 引擎)          │
+│  ├─ 解析 Markdown → 场景列表     │
+│  └─ 生成 HTML + CSS 动画         │
+├─────────────────────────────────┤
+│ Canvas 截帧                      │
+│ 每帧以 Bitmap 形式捕获 WebView   │
+├─────────────────────────────────┤
+│ MediaCodec (H.264 硬件编码器)    │
+│ Bitmap 帧 → H.264 视频流         │
+├─────────────────────────────────┤
+│ TextToSpeech (离线语音)          │
+│ 中文语音 → AAC 音频流            │
+├─────────────────────────────────┤
+│ MediaMuxer → MP4                │
+└─────────────────────────────────┘
+     │
+     ▼
+  视频文件 (相册/Movies/TruthVideo)
 ```
 
-## 使用方法
+## 构建
 
-1. **生成 GitHub Token**
-   - 访问 https://github.com/settings/tokens
-   - 点击 "Generate new token (classic)"
-   - 勾选 `repo` 和 `workflow` 权限
-   - 复制 Token
+在 GitHub Actions 运行 **Build Standalone APK** 工作流，
+或本地用 Android Studio 打开 `android/` 目录构建。
 
-2. **安装 APK**
-   - 在 Releases 或 Actions 的 Artifacts 中下载 APK
-   - 手机打开安装（允许未知来源应用）
+## 使用
 
-3. **使用 App**
-   - 打开 TruthVideo
-   - 输入 GitHub Token 和仓库名（默认 `malaxiya2019/truth-video`）
-   - 写入 Markdown 内容
-   - 选择讲师/模板/画质
-   - 点击「开始渲染」
-   - 等待 3-8 分钟
-   - 点击「下载视频」
-
-## 从源码构建
-
-在 GitHub Actions 中运行 **Build APK** 工作流即可自动编译。
+1. 安装 APK
+2. 写入 Markdown（`# 标题` + `## 场景` 格式）
+3. 选择视觉模板
+4. 点击「开始渲染」
+5. 等待完成（3-10分钟，取决于内容长度）
+6. 视频自动保存到 Movies/TruthVideo/

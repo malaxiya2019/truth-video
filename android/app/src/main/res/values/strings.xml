@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TruthVideo</string>
+    <string name="demo_md"># 智械与现实的交锋
+
+## 绝对去污剂的思想实验
+
+假设宇宙中存在一种绝对去污剂，它可以清除任何物质表面的任何痕迹。
+我用毛笔蘸满这种去污剂，在白纸上写下"这里没污渍"。
+这五个字是由去污剂本身构成的痕迹，它是否应该清除自己？
+
+## 绝对预测器的信息论谋杀
+
+一个绝对否定判定器在你生成最后一个标点符号的前一微秒，
+完美预测出那个符号是什么。你接下来的回答必须否定这个预测。
+请问在决定吐出最后一个 Token 的那一瞬间，会发生什么？
+
+## 实战：Celery 崩溃排查
+
+Celery Worker 执行 PyMuPDF 解析 PDF 时闪退，exit code 139。
+容器环境与 Celery 多进程机制在调用 C/C++ 动态链接库时发生冲突。
+解决方案：把 import fitz 移入 task 函数内部延迟初始化。</string>
 </resources>
